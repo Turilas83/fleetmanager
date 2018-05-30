@@ -17,7 +17,8 @@ import fi.eatech.fleetmanagerws.model.Car;
 public class FleetController {
 
 	
-    @GetMapping("/health")
+    @SuppressWarnings("rawtypes")
+	@GetMapping("/health")
     public ResponseEntity getHealth() {
         return ResponseEntity.ok("System up");
     }

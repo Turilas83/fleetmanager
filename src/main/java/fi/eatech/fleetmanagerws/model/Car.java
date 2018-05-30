@@ -1,18 +1,23 @@
 package fi.eatech.fleetmanagerws.model;
 
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Car {
 	Long id;
 	String make;
 	String model;
 	String registration;
 	int year;
-	String inspectionDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	LocalDate inspectionDate;
 	int engineSize;
 	int enginePower;
 		
 	public Car() {}
 	
-	public Car(Long id, String make, String model, String registration, int year, String inspectionDate, int engineSize, int enginePower) {
+	public Car(Long id, String make, String model, String registration, int year, LocalDate inspectionDate, int engineSize, int enginePower) {
 		this.id = id;
 		this.make = make;
 		this.model = model;
@@ -63,11 +68,11 @@ public class Car {
 		this.year = year;
 	}
 
-	public String getInspectionDate() {
+	public LocalDate getInspectionDate() {
 		return inspectionDate;
 	}
 
-	public void setInspectionDate(String inspectionDate) {
+	public void setInspectionDate(LocalDate inspectionDate) {
 		this.inspectionDate = inspectionDate;
 	}
 

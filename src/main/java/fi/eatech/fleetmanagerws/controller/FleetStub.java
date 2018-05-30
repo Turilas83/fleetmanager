@@ -1,11 +1,16 @@
 package fi.eatech.fleetmanagerws.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import fi.eatech.fleetmanagerws.model.Car;
+
+@JsonFormat(pattern="yyyy-MM-dd")
 
 public class FleetStub {
 	private static Map<Long, Car> cars = new HashMap<Long, Car>();
@@ -13,11 +18,11 @@ public class FleetStub {
 
 	//Luodaan autoja
 	static {
-		Car a = new Car(1L, "make4", "model17", "MMQ-050", 2003, "2018-05-08", 2111, 124);
+		Car a = new Car(1L, "make4", "model17", "MMQ-050", 2003, LocalDate.of(2018, 2, 3), 2111, 124);
 		cars.put(1L, a);
-		Car b = new Car(2L, "make5", "model7", "MMB-150", 2013, "2018-03-28", 1423, 71);
+		Car b = new Car(2L, "make5", "model7", "MMB-150", 2013, LocalDate.of(2017, 11, 5), 1423, 71);
 		cars.put(2L, b);
-		Car c = new Car(3L, "make8", "model6", "XHG-088", 2006, "2018-01-11", 2284, 496);
+		Car c = new Car(3L, "make8", "model6", "XHG-088", 2006, LocalDate.of(2017, 3, 4), 2284, 496);
 		cars.put(3L, c);
 	}
 
