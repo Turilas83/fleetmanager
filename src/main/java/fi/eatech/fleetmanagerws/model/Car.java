@@ -2,9 +2,17 @@ package fi.eatech.fleetmanagerws.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
+@Entity
 public class Car {
+	@Id
+	@GeneratedValue (strategy = GenerationType.AUTO)
 	Long id;
 	String make;
 	String model;
@@ -91,4 +99,5 @@ public class Car {
 	public void setEnginePower(int enginePower) {
 		this.enginePower = enginePower;
 	}
+
 }

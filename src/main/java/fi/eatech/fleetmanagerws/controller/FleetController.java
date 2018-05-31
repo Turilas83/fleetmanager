@@ -2,6 +2,8 @@ package fi.eatech.fleetmanagerws.controller;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,36 +13,43 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import fi.eatech.fleetmanagerws.model.Car;
+import fi.eatech.fleetmanagerws.repository.CarRepository;
 
 @RequestMapping("/fleet")
 @RestController
 public class FleetController {
 
+	@Autowired
+	private CarRepository carRepository;
 	
-    @SuppressWarnings("rawtypes")
+	@SuppressWarnings("rawtypes")
 	@GetMapping("/health")
     public ResponseEntity getHealth() {
         return ResponseEntity.ok("System up");
     }
-    @RequestMapping(value = "cars", method = RequestMethod.GET)
+    @RequestMapping(value = "/cars", method = RequestMethod.GET)
     public List<Car> list() {
-    	return FleetStub.list();
+    	return carRepository.findAll();
     }
-    @RequestMapping(value = "cars/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "add/{id}", method = RequestMethod.POST)
     public Car create(@RequestBody Car car) {
-    	return FleetStub.create(car);
+    	return carRepository.saveAndFlush(car);
     }
-    @RequestMapping(value = "cars/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "find/{id}", method = RequestMethod.GET)
     public Car get(@PathVariable Long id) {
-    	return FleetStub.get(id);
+    	return carRepository.findOne(id);
     }
-    @RequestMapping(value = "cars/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "update/{id}", method = RequestMethod.PUT)
     public Car update(@PathVariable Long id, @RequestBody Car car) {
-    	return FleetStub.update(id, car);
+    	Car existingCar = carRepository.findOne(id);
+    	BeanUtils.copyProperties(car, existingCar);
+    	return carRepository.saveAndFlush(existingCar);
     }
-    @RequestMapping(value = "cars/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
     public Car delete(@PathVariable Long id) {
-    	return FleetStub.delete(id);
+    	Car existingCar = carRepository.findOne(id);
+    	carRepository.delete(existingCar);
+    	return existingCar;
     }
  }
 

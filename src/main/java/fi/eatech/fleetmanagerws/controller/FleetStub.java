@@ -24,7 +24,7 @@ public class FleetStub {
 		cars.put(2L, b);
 		Car c = new Car(3L, "make8", "model6", "XHG-088", 2006, LocalDate.of(2017, 3, 4), 2284, 496);
 		cars.put(3L, c);
-	}
+	} 
 
 	public static List<Car> list() {
 		return new ArrayList<Car>(cars.values());
