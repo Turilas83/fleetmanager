@@ -29,46 +29,46 @@ public class FleetController {
         return ResponseEntity.ok("System up");
     }
 	// Find all cars
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Car> list() {
     	return carRepository.findAll();
     }
     // Add new car
-    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public Car create(@RequestBody Car car) {
     	return carRepository.saveAndFlush(car);
     }
     // Find one car
-    @RequestMapping(value = "find/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Car get(@PathVariable Long id) {
     	return carRepository.findOne(id);
     }
     // Update car
-    @RequestMapping(value = "update/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public Car update(@PathVariable Long id, @RequestBody Car car) {
     	Car existingCar = carRepository.findOne(id);
     	BeanUtils.copyProperties(car, existingCar);
     	return carRepository.saveAndFlush(existingCar);
     }
     // Delete car
-    @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public Car delete(@PathVariable Long id) {
     	Car existingCar = carRepository.findOne(id);
     	carRepository.delete(existingCar);
     	return existingCar;
     }
     // Find cars by make
-    @RequestMapping(value="make", method = RequestMethod.GET)
+    @RequestMapping(value="/make", method = RequestMethod.GET)
     public List<Car> makeList(@RequestParam(value="make") String make){
 		return carRepository.findByMake(make);
     }
     // Find cars by model
-	@RequestMapping(value="model", method = RequestMethod.GET)
+	@RequestMapping(value="/model", method = RequestMethod.GET)
     public List<Car> modelList(@RequestParam(value="model") String model){
 		return carRepository.findByModel(model);
     }
 	// Find cars between starting and ending year. Not working yet!
-	@RequestMapping(value="years", method = RequestMethod.GET)
+	@RequestMapping(value="/years", method = RequestMethod.GET)
     public List<Car> betweenYearsList(@RequestParam(value="year") Integer startingYear, Integer endingYear){
 		return carRepository.findByYearBetween(startingYear, endingYear);
     }
