@@ -1,6 +1,8 @@
 package fi.eatech.fleetmanagerws.model;
 
-import java.time.LocalDate;
+
+
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 public class Car {
@@ -17,21 +20,21 @@ public class Car {
 	String make;
 	String model;
 	String registration;
-	int year;
+	Integer year;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	LocalDate inspectionDate;
-	int engineSize;
-	int enginePower;
+	Date inspectionDate;
+	Integer engineSize;
+	Integer enginePower;
 		
-	public Car() {}
+	public Car() { }
 	
-	public Car(Long id, String make, String model, String registration, int year, LocalDate inspectionDate, int engineSize, int enginePower) {
+	public Car(Long id, String make, String model, String registration, Integer year, Date inspectionDate, Integer engineSize, Integer enginePower) {
 		this.id = id;
 		this.make = make;
 		this.model = model;
 		this.registration = registration;
 		this.year = year;
-		this.inspectionDate = inspectionDate;
+		this.inspectionDate = inspectionDate; 
 		this.engineSize = engineSize;
 		this.enginePower = enginePower;
 	}
@@ -68,35 +71,35 @@ public class Car {
 		this.registration = registration;
 	}
 
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 
-	public LocalDate getInspectionDate() {
+	public Date getInspectionDate() {
 		return inspectionDate;
 	}
 
-	public void setInspectionDate(LocalDate inspectionDate) {
+	public void setInspectionDate(Date inspectionDate) {
 		this.inspectionDate = inspectionDate;
-	}
+	} 
 
-	public int getEngineSize() {
+	public Integer getEngineSize() {
 		return engineSize;
 	}
 
-	public void setEngineSize(int engineSize) {
+	public void setEngineSize(Integer engineSize) {
 		this.engineSize = engineSize;
 	}
 
-	public int getEnginePower() {
+	public Integer getEnginePower() {
 		return enginePower;
 	}
 
-	public void setEnginePower(int enginePower) {
+	public void setEnginePower(Integer enginePower) {
 		this.enginePower = enginePower;
 	}
 
