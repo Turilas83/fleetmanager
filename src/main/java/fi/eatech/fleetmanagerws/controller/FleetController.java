@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,7 @@ public class FleetController {
 	private CarRepository carRepository;
 	
 	@SuppressWarnings("rawtypes")
-	@GetMapping("/health")
+	@RequestMapping("/health")
     public ResponseEntity getHealth() {
         return ResponseEntity.ok("System up");
     }
@@ -57,19 +56,19 @@ public class FleetController {
     	carRepository.delete(existingCar);
     	return existingCar;
     }
-    // Find cars by make
+    // Find cars by manufacturer
     @RequestMapping(value="/make", method = RequestMethod.GET)
-    public List<Car> makeList(@RequestParam(value="make") String make){
+    public List<Car> getCarsByManufacturerList(@RequestParam(value="make") String make){
 		return carRepository.findByMake(make);
     }
     // Find cars by model
 	@RequestMapping(value="/model", method = RequestMethod.GET)
-    public List<Car> modelList(@RequestParam(value="model") String model){
+    public List<Car> getCarsByModelList(@RequestParam(value="model") String model){
 		return carRepository.findByModel(model);
     }
 	// Find cars between starting and ending year. Not working yet!
-	@RequestMapping(value="/years", method = RequestMethod.GET)
-    public List<Car> betweenYearsList(@RequestParam(value="year") Integer startingYear, Integer endingYear){
+	@RequestMapping(value="/year", method = RequestMethod.GET)
+    public List<Car> getCarsBetweenYearsList(@RequestParam(value="year") Integer startingYear, Integer endingYear){
 		return carRepository.findByYearBetween(startingYear, endingYear);
     }
  }
