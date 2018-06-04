@@ -4,6 +4,7 @@ Fleet Manager Spring Boot
 # Installation
 * Make new folder fleetmanager to C:\ (if you want to install to some other folder, change CSVREAD path to that folder in V2-create_fleetmanager.sql)
 * Clone or download repository
+* Import existing Maven project
 * Launch application from command line: "mvn spring-boot:run" or in yor IDE Run As Java Application 
 
 # API endpoints
