@@ -28,7 +28,7 @@ public class FleetControllerTest {
 	public void init() {
 		MockitoAnnotations.initMocks(this);
 	}
-	// Test getting Car
+	// Test getting car
 	@Test
 	public void testCarGet() {
 		Car c = new Car();

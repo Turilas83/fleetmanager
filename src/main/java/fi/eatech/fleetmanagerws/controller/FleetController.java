@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fi.eatech.fleetmanagerws.model.Car;
@@ -28,12 +27,12 @@ public class FleetController {
         return ResponseEntity.ok("System up");
     }
 	// Find all cars
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<Car> list() {
     	return carRepository.findAll();
     }
     // Add new car
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public Car create(@RequestBody Car car) {
     	return carRepository.saveAndFlush(car);
     }
@@ -57,18 +56,18 @@ public class FleetController {
     	return existingCar;
     }
     // Find cars by manufacturer
-    @RequestMapping(value="/make", method = RequestMethod.GET)
-    public List<Car> getCarsByManufacturerList(@RequestParam(value="make") String make){
+    @RequestMapping(value= "/make/{make}", method = RequestMethod.GET)
+    public List<Car> getCarsByManufacturerList(@PathVariable("make") String make){
 		return carRepository.findByMake(make);
     }
     // Find cars by model
-	@RequestMapping(value="/model", method = RequestMethod.GET)
-    public List<Car> getCarsByModelList(@RequestParam(value="model") String model){
+	@RequestMapping(value= "/model/{model}", method = RequestMethod.GET)
+    public List<Car> getCarsByModelList(@PathVariable("model") String model){
 		return carRepository.findByModel(model);
     }
 	// Find cars between starting and ending year. Not working yet!
-	@RequestMapping(value="/year", method = RequestMethod.GET)
-    public List<Car> getCarsBetweenYearsList(@RequestParam(value="year") Integer startingYear, Integer endingYear){
+	@RequestMapping(value= "/startingYear/{startingYear}/endingYear/{endingYear}", method = RequestMethod.GET)
+    public List<Car> getCarsBetweenYearsList(@PathVariable("startingYear") Integer startingYear, @PathVariable("endingYear") Integer endingYear){
 		return carRepository.findByYearBetween(startingYear, endingYear);
     }
  }
