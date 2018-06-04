@@ -65,7 +65,7 @@ public class FleetController {
     public List<Car> getCarsByModelList(@PathVariable("model") String model){
 		return carRepository.findByModel(model);
     }
-	// Find cars between starting and ending year. Not working yet!
+	// Find cars between starting and ending year
 	@RequestMapping(value= "/startingYear/{startingYear}/endingYear/{endingYear}", method = RequestMethod.GET)
     public List<Car> getCarsBetweenYearsList(@PathVariable("startingYear") Integer startingYear, @PathVariable("endingYear") Integer endingYear){
 		return carRepository.findByYearBetween(startingYear, endingYear);
